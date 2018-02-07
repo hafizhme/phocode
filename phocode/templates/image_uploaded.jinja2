@@ -1,0 +1,11 @@
+{% extends "layout.jinja2" %}
+
+{% block nav %}
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="/">EXIT</a></li>
+  </ul>
+{% endblock %}
+
+{% block content %}
+  <img src="{{request.static_url('phocode:static/.images/' + imagename)}}">
+{% endblock %}
