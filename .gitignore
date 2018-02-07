@@ -19,3 +19,6 @@ Data.fs*
 .DS_Store
 coverage
 test
+.images
+.pytest_cache/*
+.ropeproject/*
