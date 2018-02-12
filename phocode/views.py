@@ -1,4 +1,5 @@
 from pyramid.view import view_config
+from pyramid.httpexceptions import HTTPFound
 from pyramid_storage.exceptions import FileNotAllowed
 
 
@@ -7,10 +8,14 @@ def home(request):
     return {'project': 'phocode'}
 
 
-@view_config(route_name='upload image', renderer='templates/image_uploaded.jinja2')
+@view_config(route_name='upload image', request_method='POST')
 def upload_image(request):
-    try:
-        imagename = request.storage.save(request.POST['imagefile'])
-    except FileNotAllowed:
-        request.session.flash('Sorry, this file is not allowed')
-    return {'imagename': imagename}
+    filename = request.storage.save(request.POST['imagefile'])
+    return HTTPFound(location='/image/'+filename)
+
+
+@view_config(route_name='image', renderer='templates/image.jinja2')
+def image(request):
+    return {
+        'filename': request.matchdict['filename'],
+    }
