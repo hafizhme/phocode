@@ -18,6 +18,7 @@ def main(global_config, **settings):
     config.add_route('home', '/')
     config.add_route('upload image', '/upload-image')
     config.add_route('image', '/image/{filename}')
+    config.add_route('operate', '/image/{filename}/{operation}')
     config.scan()
 
     return config.make_wsgi_app()
