@@ -10,8 +10,10 @@ def home(request):
 
 @view_config(route_name='upload image', request_method='POST')
 def upload_image(request):
-    filename = request.storage.save(request.POST['imagefile'])
-    return HTTPFound(location='/image/'+filename)
+    file = request.POST['imagefile']
+
+    filename = request.storage.save(file, randomize=True)
+    return HTTPFound(location='/image/' + filename)
 
 
 @view_config(route_name='image', renderer='templates/image.jinja2')
