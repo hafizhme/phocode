@@ -37,9 +37,11 @@ def operate(request):
 
     resulted_image, error = None, None
 
-    from phocode.operator import invert
+    from phocode.operator import invert, grayscale
     if operation == 'invert':
         resulted_image, error = invert.invert(original_image)
+    elif operation == 'grayscale':
+        resulted_image, error = grayscale.do(original_image)
 
     if error is not None:
         # TODO add Exception
