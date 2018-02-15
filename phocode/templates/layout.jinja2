@@ -25,7 +25,7 @@
 
   <body>
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="/">Phocode</a>
@@ -35,7 +35,7 @@
           {% endblock %}
       </div>
     </nav>
-    <div class="container-fluid" style="overflow: scroll">
+    <div class="canvas container-fluid" style="overflow: scroll">
       {% block content %}
           <div class="container">
             <form class="form-inline" action="/upload-image" method="post" accept-charset="utf-8"
@@ -58,5 +58,7 @@
 
     <!-- Fontawesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+    <script src="{{request.static_url('phocode:static/custom.js')}}"></script>
   </body>
 </html>
