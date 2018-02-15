@@ -1,6 +1,8 @@
 {% extends "layout.jinja2" %}
 {% block nav %}
   <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{request.route_url('operate', filename=filename, operation='flip_horizontal')}}" title="Flip Horizontally"><i class="fas fa-arrows-alt-h fa-lg"></i></a></li>
+    <li><a href="{{request.route_url('operate', filename=filename, operation='flip_vertical')}}" title="Flip Vertically"><i class="fas fa-arrows-alt-v fa-lg"></i></a></li>
     <li class="dropdown">
       <a a="#" title="Adjust" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-adjust fa-lg"></i></a>
       <ul class="dropdown-menu">
