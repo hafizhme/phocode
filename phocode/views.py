@@ -40,7 +40,8 @@ def operate(request):
     from phocode.operator import (
         invert, grayscale,
         zoom_in, zoom_out,
-        flip_vertical, flip_horizontal
+        flip_vertical, flip_horizontal,
+        brightness
     )
 
     if operation == 'invert':
@@ -55,6 +56,9 @@ def operate(request):
         resulted_image, error = flip_vertical.do(original_image)
     elif operation == 'flip_horizontal':
         resulted_image, error = flip_horizontal.do(original_image)
+    elif operation == 'brightness':
+        factor = float(request.GET['factor'])
+        resulted_image, error = brightness.do(original_image, factor)
 
     if error is not None:
         # TODO add Exception
