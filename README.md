@@ -27,6 +27,11 @@ python -m venv env        # assuming python 3.6.4 is the default
 pip install --upgrade pip setuptools
 ```
 
+- Install required package from pip
+```
+pip install -r requirements.txt
+```
+
 - Install the project in editable mode with its testing requirements.
 ```
 pip install -e ".[testing]"
