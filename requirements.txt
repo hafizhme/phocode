@@ -10,7 +10,7 @@ Mako==1.0.7
 MarkupSafe==1.0
 mccabe==0.6.1
 PasteDeploy==1.5.2
--e git+git@github.com:hafizhme/phocode.git@tugas-3#egg=phocode 
+-e git+https://github.com/hafizhme/phocode.git@tugas-3#egg=phocode 
 Pillow==5.0.0
 plaster==1.0
 plaster-pastedeploy==0.4.2
