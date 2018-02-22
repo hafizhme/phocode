@@ -1,6 +1,6 @@
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
-from pyramid_storage.exceptions import FileNotAllowed
+from os import path
 
 
 @view_config(route_name='home', renderer='templates/layout.jinja2')
@@ -18,8 +18,18 @@ def upload_image(request):
 
 @view_config(route_name='image', renderer='templates/image.jinja2')
 def image(request):
+    from PIL import Image
+
+    filename = request.matchdict['filename']
+    im = Image.open(
+        request.storage.path(filename)
+    )
+    size = im.size
+    im.close()
+
     return {
-        'filename': request.matchdict['filename'],
+        'filename': filename,
+        'size': size
     }
 
 
@@ -68,6 +78,8 @@ def operate(request):
     if request.storage.exists(resulted_filename):
         request.storage.delete(resulted_filename)
 
-    resulted_image.save(request.storage.base_path + '/' + resulted_filename)
+    resulted_image.save(
+        path.join(request.storage.base_path, resulted_filename)
+    )
 
     return HTTPFound(location='/image/' + resulted_filename)

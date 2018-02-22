@@ -1,5 +1,6 @@
 {% extends "layout.jinja2" %}
 {% block nav %}
+  <p class="navbar-text">RGB Image {{size}}</p>
   <ul class="nav navbar-nav navbar-right">
     <li><a type="button" href="#" title="Brightness" data-toggle="modal" data-target=".modal-brightness"><i class="fas fa-sun fa-lg"></i></a></li>
     <li><a href="{{request.route_url('operate', filename=filename, operation='flip_horizontal')}}" title="Flip Horizontally"><i class="fas fa-arrows-alt-h fa-lg"></i></a></li>
