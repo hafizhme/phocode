@@ -59,6 +59,7 @@
     <!-- Fontawesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
-    <script src="{{request.static_url('phocode:static/custom.js')}}"></script>
+    {% block script %}
+    {% endblock %}
   </body>
 </html>

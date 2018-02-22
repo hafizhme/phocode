@@ -1,6 +1,11 @@
 {% extends "layout.jinja2" %}
 {% block nav %}
+  <p class="navbar-text">RGB Image {{size}}</p>
   <ul class="nav navbar-nav navbar-right">
+    <li><a type="button" href="#" title="Crop" data-toggle="modal" data-target=".modal-crop"><i class="fas fa-crop fa-lg"></i></a></li>
+    <li><a type="button" href="#" title="Brightness" data-toggle="modal" data-target=".modal-brightness"><i class="fas fa-sun fa-lg"></i></a></li>
+    <li><a href="{{request.route_url('operate', filename=filename, operation='flip_horizontal')}}" title="Flip Horizontally"><i class="fas fa-arrows-alt-h fa-lg"></i></a></li>
+    <li><a href="{{request.route_url('operate', filename=filename, operation='flip_vertical')}}" title="Flip Vertically"><i class="fas fa-arrows-alt-v fa-lg"></i></a></li>
     <li class="dropdown">
       <a a="#" title="Adjust" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-adjust fa-lg"></i></a>
       <ul class="dropdown-menu">
@@ -16,4 +21,61 @@
 
 {% block content %}
   <img src="{{request.static_url('phocode:static/.images/' + filename)}}">
+
+  <div class="modal fade modal-brightness" tabindex="-1" role="dialog" aria-labelledby="brightnessModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Brightness</h4>
+        </div>
+        <div class="modal-body">
+          <p>Put brightness factor number below. You can put any number satisfy 0 < x and x is real usign notation i. e. 0.4</p>
+          <form class="form-inline" method="get" action="{{request.route_url('operate', filename=filename, operation='brightness')}}">
+            <div class="form-group">
+              <input type="text" class="form-control" id="factorName" placeholder="Factor Number" name="factor">
+            </div>
+            <button type="submit" class="btn btn-default">Do Brightness</button>
+          </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+
+  <div class="modal fade modal-crop" tabindex="-1" role="dialog" aria-labelledby="cropModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Crop</h4>
+        </div>
+        <div class="modal-body">
+          <p>Put crop factor number below.</p>
+          <p>FROM is in (0 0) to {{size}} and no more than FROM</p>
+          <p>FROM is more than FROM to {{size}}</p>
+          <p>PS this program do not handle any error, please input the valid coordinate to not make the program embarased</p>
+          <form class="form-inline" method="get" action="{{request.route_url('operate', filename=filename, operation='crop')}}">
+            <div class="form-group">
+              <label>From</label>
+              <input type="number" class="form-control" id="fr" placeholder="From x" name="frx">
+              <input type="number" class="form-control" id="fr" placeholder="From y" name="fry">
+            </div>
+            <div class="form-group">
+              <label>To</label>
+              <input type="number" class="form-control" id="to" placeholder="To x" name="tox">
+              <input type="number" class="form-control" id="to" placeholder="To y" name="toy">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-default">Do Crop</button>
+          </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+</script>
 {% endblock %}
