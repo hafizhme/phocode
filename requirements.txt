@@ -1,18 +1,23 @@
+astroid==1.6.1
 attrs==17.4.0
 beautifulsoup4==4.6.0
 coverage==4.5
 hupper==1.0
+isort==4.3.4
 Jinja2==2.10
+lazy-object-proxy==1.3.1
 Mako==1.0.7
 MarkupSafe==1.0
+mccabe==0.6.1
 PasteDeploy==1.5.2
--e git+git@github.com:hafizhme/phocode.git@f5c713252da0fe0dd95607d401d0592dc3fd7b4d#egg=phocode
+-e git+git@github.com:hafizhme/phocode.git@a8a55a055859a57247f94bc248e3947c064a7a05#egg=phocode
 Pillow==5.0.0
 plaster==1.0
 plaster-pastedeploy==0.4.2
 pluggy==0.6.0
 py==1.5.2
 Pygments==2.2.0
+pylint==1.8.2
 pyramid==1.9.1
 pyramid-debugtoolbar==4.3
 pyramid-jinja2==2.7
@@ -27,5 +32,6 @@ venusian==1.1.0
 waitress==1.1.0
 WebOb==1.8.0rc1
 WebTest==2.0.29
+wrapt==1.10.11
 zope.deprecation==4.3.0
 zope.interface==4.4.3
