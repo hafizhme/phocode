@@ -51,7 +51,8 @@ def operate(request):
         invert, grayscale,
         zoom_in, zoom_out,
         flip_vertical, flip_horizontal,
-        brightness
+        brightness,
+        crop,
     )
 
     if operation == 'invert':
@@ -69,6 +70,10 @@ def operate(request):
     elif operation == 'brightness':
         factor = float(request.GET['factor'])
         resulted_image, error = brightness.do(original_image, factor)
+    elif operation == 'crop':
+        fr = (int(request.GET['frx']), int(request.GET['fry']))
+        to = (int(request.GET['tox']), int(request.GET['toy']))
+        resulted_image, error = crop.do(original_image, fr, to)
 
     if error is not None:
         # TODO add Exception
