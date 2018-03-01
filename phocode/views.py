@@ -53,6 +53,7 @@ def operate(request):
         flip_vertical, flip_horizontal,
         brightness,
         crop,
+        rotate,
     )
 
     if operation == 'invert':
@@ -74,6 +75,9 @@ def operate(request):
         fr = (int(request.GET['frx']), int(request.GET['fry']))
         to = (int(request.GET['tox']), int(request.GET['toy']))
         resulted_image, error = crop.do(original_image, fr, to)
+    elif operation == 'rotate':
+        degree = int(request.GET['degree'])
+        resulted_image, error = rotate.do(original_image, degree)
 
     if error is not None:
         # TODO add Exception
