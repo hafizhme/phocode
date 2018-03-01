@@ -2,6 +2,9 @@
 {% block nav %}
   <p class="navbar-text">RGB Image {{size}}</p>
   <ul class="nav navbar-nav navbar-right">
+  <li><a href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=90" title="Rotate 90">90</a></li>
+  <li><a href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=180" title="Rotate 180">180</a></li>
+  <li><a href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=270" title="Rotate 270">270</a></li>
     <li><a type="button" href="#" title="Crop" data-toggle="modal" data-target=".modal-crop"><i class="fas fa-crop fa-lg"></i></a></li>
     <li><a type="button" href="#" title="Brightness" data-toggle="modal" data-target=".modal-brightness"><i class="fas fa-sun fa-lg"></i></a></li>
     <li><a href="{{request.route_url('operate', filename=filename, operation='flip_horizontal')}}" title="Flip Horizontally"><i class="fas fa-arrows-alt-h fa-lg"></i></a></li>
