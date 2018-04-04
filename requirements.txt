@@ -13,8 +13,9 @@ matplotlib==2.1.2
 mccabe==0.6.1
 numpy==1.14.1
 PasteDeploy==1.5.2
--e git+https://github.com/hafizhme/phocode.git@tugas-3#egg=phocode 
+-e git+git@github.com:hafizhme/phocode.git@6afebb0229b09ac6dd7224c383b0b816ca2f4949#egg=phocode
 Pillow==5.0.0
+pkg-resources==0.0.0
 plaster==1.0
 plaster-pastedeploy==0.4.2
 pluggy==0.6.0
