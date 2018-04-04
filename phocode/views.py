@@ -1,3 +1,4 @@
+from PIL import Image
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from os import path
@@ -18,8 +19,6 @@ def upload_image(request):
 
 @view_config(route_name='image', renderer='templates/image.jinja2')
 def image(request):
-    from PIL import Image
-
     filename = request.matchdict['filename']
     im = Image.open(
         request.storage.path(filename)
@@ -42,7 +41,6 @@ def operate(request):
     if not request.storage.exists(filename):
         return HTTPFound(location='/')
 
-    from PIL import Image
     original_image = Image.open(request.storage.path(filename))
 
     resulted_image, error = None, None
@@ -54,7 +52,11 @@ def operate(request):
         brightness,
         crop,
         rotate,
+        histogram,
     )
+
+    resulted_filename = operation + '-' + filename
+    resulted_filepath = path.join(request.storage.base_path, resulted_filename)
 
     if operation == 'invert':
         resulted_image, error = invert.invert(original_image)
@@ -78,17 +80,19 @@ def operate(request):
     elif operation == 'rotate':
         degree = int(request.GET['degree'])
         resulted_image, error = rotate.do(original_image, degree)
+    elif operation == 'histogram':
+        resulted_image, error = histogram.do(original_image)
 
     if error is not None:
         # TODO add Exception
         pass
 
-    resulted_filename = operation + '-' + filename
     if request.storage.exists(resulted_filename):
         request.storage.delete(resulted_filename)
 
-    resulted_image.save(
-        path.join(request.storage.base_path, resulted_filename)
-    )
+    if type(resulted_image) == Image.Image:
+        resulted_image.save(resulted_filepath)
+    else:
+        resulted_image.savefig(resulted_filepath)
 
     return HTTPFound(location='/image/' + resulted_filename)
