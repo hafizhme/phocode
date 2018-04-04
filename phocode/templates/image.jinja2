@@ -1,30 +1,32 @@
 {% extends "layout.jinja2" %}
-{% block nav %}
-  <p class="navbar-text">RGB Image {{size}}</p>
-  <ul class="nav navbar-nav navbar-right">
-    <li><a href="{{request.route_url('operate', filename=filename, operation='histogram')}}" title="Histogram">Histogram</a></li>  
-    <li><a href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=270" title="Rotate 270">270</a></li>
-    <li><a href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=180" title="Rotate 180">180</a></li>
-    <li><a href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=90" title="Rotate 90">90</a></li>
-    <li><a type="button" href="#" title="Crop" data-toggle="modal" data-target=".modal-crop"><i class="fas fa-crop fa-lg"></i></a></li>
-    <li><a type="button" href="#" title="Brightness" data-toggle="modal" data-target=".modal-brightness"><i class="fas fa-sun fa-lg"></i></a></li>
-    <li><a href="{{request.route_url('operate', filename=filename, operation='flip_horizontal')}}" title="Flip Horizontally"><i class="fas fa-arrows-alt-h fa-lg"></i></a></li>
-    <li><a href="{{request.route_url('operate', filename=filename, operation='flip_vertical')}}" title="Flip Vertically"><i class="fas fa-arrows-alt-v fa-lg"></i></a></li>
-    <li class="dropdown">
-      <a a="#" title="Adjust" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-adjust fa-lg"></i></a>
-      <ul class="dropdown-menu">
-        <li><a href="{{request.route_url('operate', filename=filename, operation='grayscale')}}" title="Grayscale">Grayscale</a></li>
-        <li><a href="{{request.route_url('operate', filename=filename, operation='invert')}}" title="Invert">Invert</a></li>
-      </ul>
-    </li>
-    <li><a href="{{request.route_url('operate', filename=filename, operation='zoom_in')}}" title="Zoom In"><i class="fas fa-search-plus fa-lg"></i></a></li>
-    <li><a href="{{request.route_url('operate', filename=filename, operation='zoom_out')}}" title="Zoom Out"><i class="fas fa-search-minus fa-lg"></i></a></li>
-    <li><a href="/">EXIT <i class="fas fa-sign-out-alt fa-lg"></i></a></li>
-  </ul>
-{% endblock %}
 
 {% block content %}
-  <img src="{{request.static_url('phocode:static/.images/' + filename)}}">
+  <div class="col-md-8">
+    <div class="canvas container-fluid" style="overflow: scroll">
+      <img src="{{request.static_url('phocode:static/.images/' + filename)}}">
+    </div>
+  </div>
+  <div class="col-md-4">
+    <a class="btn btn-default" href="/">NEW IMAGE</a>
+    <br>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='zoom_out')}}" title="Zoom Out">Zoom Out 2x</a>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='zoom_in')}}" title="Zoom In">Zoom In 2x</a>
+    <br>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='invert')}}" title="Invert">Invert</a>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='grayscale')}}" title="Grayscale">Grayscale</a>
+    <br>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='flip_vertical')}}" title="Flip Vertically">Flip Vertically</a>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='flip_horizontal')}}" title="Flip Horizontally">Flip Horizontally</a>
+    <br>
+    <a class="btn btn-default" type="button" href="#" title="Brightness" data-toggle="modal" data-target=".modal-brightness">Brightness</a>
+    <a class="btn btn-default" type="button" href="#" title="Crop" data-toggle="modal" data-target=".modal-crop">Crop</a>
+    <br>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=90" title="Rotate 90">Rotate 90</a>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=180" title="Rotate 180">Rotate 180</a>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=270" title="Rotate 270">Rotate 270</a>
+    <br>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='histogram')}}" title="Histogram">Histogram</a>
+  </div>
 
   <div class="modal fade modal-brightness" tabindex="-1" role="dialog" aria-labelledby="brightnessModalLabel">
     <div class="modal-dialog modal-sm" role="document">
