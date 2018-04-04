@@ -26,6 +26,10 @@
     <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=270" title="Rotate 270">Rotate 270</a>
     <br>
     <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='histogram')}}" title="Histogram">Histogram</a>
+    <br>
+    Noise reduction <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='noise_reduction')}}?method=modus" title="Rotate 270">Modus</a>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='noise_reduction')}}?method=median" title="Rotate 270">Median</a>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='noise_reduction')}}?method=mean" title="Rotate 270">Mean</a>
   </div>
 
   <div class="modal fade modal-brightness" tabindex="-1" role="dialog" aria-labelledby="brightnessModalLabel">
