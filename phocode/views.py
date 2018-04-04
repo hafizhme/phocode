@@ -53,6 +53,7 @@ def operate(request):
         crop,
         rotate,
         histogram,
+        noise_reduction,
     )
 
     resulted_filename = operation + '-' + filename
@@ -82,6 +83,11 @@ def operate(request):
         resulted_image, error = rotate.do(original_image, degree)
     elif operation == 'histogram':
         resulted_image, error = histogram.do(original_image)
+    elif operation == 'noise_reduction':
+        resulted_image, error = noise_reduction.do(
+            original_image,
+            request.GET['method']
+        )
 
     if error is not None:
         # TODO add Exception
