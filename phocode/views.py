@@ -1,4 +1,5 @@
 from PIL import Image
+from matplotlib import pyplot
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from os import path
@@ -54,6 +55,7 @@ def operate(request):
         rotate,
         histogram,
         noise_reduction,
+        segmentation,
     )
 
     resulted_filename = operation + '-' + filename
@@ -88,6 +90,14 @@ def operate(request):
             original_image,
             request.GET['method']
         )
+    elif operation == 'segmentation':
+        seed = (int(request.GET['sex']), int(request.GET['sey']))
+        threshold = int(request.GET['th'])
+        resulted_image, error = segmentation.seed_region_growth(
+            original_image,
+            seed,
+            threshold
+        )
 
     if error is not None:
         # TODO add Exception
@@ -96,9 +106,9 @@ def operate(request):
     if request.storage.exists(resulted_filename):
         request.storage.delete(resulted_filename)
 
-    if type(resulted_image) == Image.Image:
-        resulted_image.save(resulted_filepath)
-    else:
+    if resulted_image == pyplot:
         resulted_image.savefig(resulted_filepath)
+    else:
+        resulted_image.save(resulted_filepath)
 
     return HTTPFound(location='/image/' + resulted_filename)
