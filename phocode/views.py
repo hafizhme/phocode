@@ -90,13 +90,23 @@ def operate(request):
             original_image,
             request.GET['method']
         )
-    elif operation == 'segmentation':
+    elif operation == 'srg':
         seed = (int(request.GET['sex']), int(request.GET['sey']))
         threshold = int(request.GET['th'])
         resulted_image, error = segmentation.seed_region_growth(
             original_image,
             seed,
             threshold
+        )
+    elif operation == 'thr':
+        r_range = range(int(request.GET['trl']), int(request.GET['trh']))
+        g_range = range(int(request.GET['tgl']), int(request.GET['tgh']))
+        b_range = range(int(request.GET['tbl']), int(request.GET['tbh']))
+        resulted_image, error = segmentation.threshold(
+            im=original_image,
+            r_range=r_range,
+            g_range=g_range,
+            b_range=b_range
         )
 
     if error is not None:

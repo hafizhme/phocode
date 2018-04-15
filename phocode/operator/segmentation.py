@@ -6,7 +6,7 @@ def seed_region_growth(im: Image, se: (int, int), th: int):
         return (se[0] - th <= cu[0] and cu[0] <= se[0] + th) \
             and (se[1] - th <= cu[1] and cu[1] <= se[1] + th) \
             and (se[2] - th <= cu[2] and cu[2] <= se[2] + th)
-
+    im = im.convert('RGBA')
     co = [
         [
             False for y in range(im.size[1])
@@ -50,8 +50,22 @@ def seed_region_growth(im: Image, se: (int, int), th: int):
 
     for x in range(im.size[0]):
         for y in range(im.size[1]):
+            alpha = 0
             if co[x][y]:
-                im_pe = im.getpixel((x, y))
-                re_pe = (255 - im_pe[0], 255 - im_pe[1], 255 - im_pe[2])
-                im.putpixel((x, y), re_pe)
+                alpha = 255
+            im_pe = im.getpixel((x, y))
+            re_pe = (im_pe[0], im_pe[1], im_pe[2], alpha)
+            im.putpixel((x, y), re_pe)
+    return im, None
+
+
+def threshold(im: Image, r_range: range, g_range: range, b_range: range):
+    im = im.convert('RGBA')
+    for x in range(im.size[0]):
+        for y in range(im.size[1]):
+            px = im.getpixel((x, y))
+            alpha = 0
+            if px[0] in r_range and px[1] in g_range and px[2] in b_range:
+                alpha = 255
+            im.putpixel((x, y), (px[0], px[1], px[2], alpha))
     return im, None
