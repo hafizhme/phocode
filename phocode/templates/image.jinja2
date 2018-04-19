@@ -31,7 +31,9 @@
     <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='noise_reduction')}}?method=median" title="Rotate 270">Median</a>
     <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='noise_reduction')}}?method=mean" title="Rotate 270">Mean</a>
     <br>
-    <a class="btn btn-default" type="button" href="#" title="Segmentation" data-toggle="modal" data-target=".modal-segmentation">Segmentation</a>
+    Segmentation <a class="btn btn-default" type="button" href="#" title="Segmentation Seed Region Growth" data-toggle="modal" data-target=".modal-srg">Seed Region Growth</a>
+    <a class="btn btn-default" type="button" href="#" title="Segmentation Threshold" data-toggle="modal" data-target=".modal-thr">Threshold</a>
+
 
   </div>
 
@@ -86,18 +88,18 @@
     </div><!-- /.modal-dialog -->
   </div>
 
-  <div class="modal fade modal-segmentation" tabindex="-1" role="dialog" aria-labelledby="cropModalLabel">
+  <div class="modal fade modal-srg" tabindex="-1" role="dialog" aria-labelledby="cropModalLabel">
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Crop</h4>
+          <h4 class="modal-title">Seed Region Growth</h4>
         </div>
         <div class="modal-body">
           <p>Put seed coordinate.</p>
-          <p>Seed is in (0 0) to {{size}} and no more than Seed</p>
-          <p>PS this program do not handle any error, please input the valid coordinate to not make the program embarased</p>
-          <form class="form-inline" method="get" action="{{request.route_url('operate', filename=filename, operation='segmentation')}}">
+          <p>Seed is in (0 0) to {{size}}</p>
+          <p>But before that, make sure this image encoded using <strong>png, bmp, that support RGBA image</strong></p>
+          <form class="form-inline" method="get" action="{{request.route_url('operate', filename=filename, operation='srg')}}">
             <div class="form-group">
               <label>Seed Coordinate</label>
               <input type="number" class="form-control" id="sex" placeholder="Seed X" name="sex">
@@ -106,6 +108,40 @@
             <div class="form-group">
               <label>Threshold</label>
               <input type="number" class="form-control" id="fr" placeholder="Threshold" name="th">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-default">Do Segmentation</button>
+          </form>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+
+  <div class="modal fade modal-thr" tabindex="-1" role="dialog" aria-labelledby="cropModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Threshold</h4>
+        </div>
+        <div class="modal-body">
+          <p>Put threshold the threshold</p>
+          <p>But before that, make sure this image encoded using <strong>png, bmp, that support RGBA image</strong></p>
+          <form class="form-inline" method="get" action="{{request.route_url('operate', filename=filename, operation='thr')}}">
+            <div class="form-group">
+              <label>Threshold Red</label>
+              <input type="number" class="form-control" placeholder="Threshold Red Low" name="trl">
+              <input type="number" class="form-control" placeholder="Threshold Red High" name="trh">
+            </div>
+            <div class="form-group">
+              <label>Threshold Green</label>
+              <input type="number" class="form-control" placeholder="Threshold Green Low" name="tgl">
+              <input type="number" class="form-control" placeholder="Threshold Green High" name="tgh">
+            </div>
+            <div class="form-group">
+              <label>Threshold Blue</label>
+              <input type="number" class="form-control" placeholder="Threshold Blue Low" name="tbl">
+              <input type="number" class="form-control" placeholder="Threshold Blue High" name="tbh">
             </div>
             <br>
             <button type="submit" class="btn btn-default">Do Segmentation</button>
