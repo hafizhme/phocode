@@ -21,6 +21,11 @@
     <a class="btn btn-default" type="button" href="#" title="Brightness" data-toggle="modal" data-target=".modal-brightness">Brightness</a>
     <a class="btn btn-default" type="button" href="#" title="Crop" data-toggle="modal" data-target=".modal-crop">Crop</a>
     <br>
+    Convolution
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='convolution')}}?kernel=sharpen" title="Sharpen">Sharpen</a>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='convolution')}}?kernel=edge_detection" title="Edge Detection">Edge Detection</a>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='convolution')}}?kernel=gaussian_blur_3" title="Gaussian Blur 3x3">Gaussian Blur 3x3</a>
+    <br>
     <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=90" title="Rotate 90">Rotate 90</a>
     <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=180" title="Rotate 180">Rotate 180</a>
     <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='rotate')}}?degree=270" title="Rotate 270">Rotate 270</a>

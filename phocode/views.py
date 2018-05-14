@@ -52,6 +52,7 @@ def operate(request):
         flip_vertical, flip_horizontal,
         brightness,
         crop,
+        convolution,
         rotate,
         histogram,
         noise_reduction,
@@ -80,6 +81,13 @@ def operate(request):
         fr = (int(request.GET['frx']), int(request.GET['fry']))
         to = (int(request.GET['tox']), int(request.GET['toy']))
         resulted_image, error = crop.do(original_image, fr, to)
+    elif operation == 'convolution':
+        if request.GET['kernel'] == 'sharpen':
+            resulted_image, error = convolution.sharpen(original_image)
+        elif request.GET['kernel'] == 'gaussian_blur_3':
+            resulted_image, error = convolution.gaussian_blur_3(original_image)
+        elif request.GET['kernel'] == 'edge_detection':
+            resulted_image, error = convolution.edge_detection(original_image)
     elif operation == 'rotate':
         degree = int(request.GET['degree'])
         resulted_image, error = rotate.do(original_image, degree)
