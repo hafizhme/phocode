@@ -57,6 +57,7 @@ def operate(request):
         histogram,
         noise_reduction,
         segmentation,
+        morphology,
     )
 
     resulted_filename = operation + '-' + filename
@@ -116,6 +117,11 @@ def operate(request):
             g_range=g_range,
             b_range=b_range
         )
+    elif operation == 'morphology':
+        if request.GET['type'] == 'dilation':
+            resulted_image, error = morphology.dilation(original_image)
+        elif request.GET['type'] == 'erosion':
+            resulted_image, error = morphology.erosion(original_image)
 
     if error is not None:
         # TODO add Exception

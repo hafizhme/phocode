@@ -38,6 +38,10 @@
     <br>
     Segmentation <a class="btn btn-default" type="button" href="#" title="Segmentation Seed Region Growth" data-toggle="modal" data-target=".modal-srg">Seed Region Growth</a>
     <a class="btn btn-default" type="button" href="#" title="Segmentation Threshold" data-toggle="modal" data-target=".modal-thr">Threshold</a>
+    <br>
+    Image morphology
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='morphology')}}?type=dilation" title="Dilation">Dilation</a>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='morphology')}}?type=erosion" title="Erosion">Erosion</a>
 
 
   </div>
