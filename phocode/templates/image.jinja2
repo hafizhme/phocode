@@ -42,7 +42,9 @@
     Image morphology
     <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='morphology')}}?type=dilation" title="Dilation">Dilation</a>
     <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='morphology')}}?type=erosion" title="Erosion">Erosion</a>
-
+    <br>
+    <a class="btn btn-default" href="{{request.route_url('operate', filename=filename, operation='compress')}}" title="Compress this Image">Compress this Image</a>
+    <a class="btn btn-default" href="/" title="Decompress Image">Decompress Image</a>
 
   </div>
 
