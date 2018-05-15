@@ -16,9 +16,10 @@ def rle_compress(img: Image):
     if img.mode != 'RGB':
         img = img.convert('RGB')
 
+    filename = str(uuid.uuid4())
     filepath = os.path.join(
         os.getcwd(), 'phocode', 'static', '.compression',
-        str(uuid.uuid4())
+        filename
     )
     ofstream = open(filepath, 'wb+')
 
@@ -42,10 +43,10 @@ def rle_compress(img: Image):
     ofstream.write(buf[2])
 
     ofstream.close()
-    return filepath, None
+    return filename, None
 
 
-def rle_decompress(filename: str):
+def rle_decompress(ifstream):
     def to_buf(bf, stream, n_o_p):
         count = 0
         while (count < n_o_p):
@@ -65,11 +66,6 @@ def rle_decompress(filename: str):
             dt[1] -= 1
         return dt
 
-    filepath = os.path.join(
-        os.getcwd(), 'phocode', 'static', '.compression',
-        filename
-    )
-    ifstream = open(filepath, 'rb')
     width = int.from_bytes(ifstream.read(2), 'big')
     height = int.from_bytes(ifstream.read(2), 'big')
 

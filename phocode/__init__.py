@@ -17,6 +17,7 @@ def main(global_config, **settings):
     config.add_static_view('static', 'static', cache_max_age=300)
     config.add_route('home', '/')
     config.add_route('upload image', '/upload-image')
+    config.add_route('decompress', '/decompress')
     config.add_route('image', '/image/{filename}')
     config.add_route('operate', '/image/{filename}/{operation}')
     config.scan()

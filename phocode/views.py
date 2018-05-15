@@ -18,6 +18,21 @@ def upload_image(request):
     return HTTPFound(location='/image/' + filename)
 
 
+@view_config(route_name='decompress', request_method='POST')
+def decompress(request):
+    from phocode.operator import compression
+    import uuid
+    import os
+    resulted_image, error = compression.rle_decompress(request.POST['file'].file)
+    filename = str(uuid.uuid4()) + '.png'
+    filepath = os.path.join(
+        os.getcwd(), 'phocode', 'static', '.images',
+        filename
+    )
+    resulted_image.save(filepath)
+    return HTTPFound(location='/image/' + filename)
+
+
 @view_config(route_name='image', renderer='templates/image.jinja2')
 def image(request):
     filename = request.matchdict['filename']
@@ -58,6 +73,7 @@ def operate(request):
         noise_reduction,
         segmentation,
         morphology,
+        compression
     )
 
     resulted_filename = operation + '-' + filename
@@ -122,6 +138,8 @@ def operate(request):
             resulted_image, error = morphology.dilation(original_image)
         elif request.GET['type'] == 'erosion':
             resulted_image, error = morphology.erosion(original_image)
+    elif operation == 'compress':
+        resulted_image, error = compression.rle_compress(original_image)
 
     if error is not None:
         # TODO add Exception
@@ -132,6 +150,8 @@ def operate(request):
 
     if resulted_image == pyplot:
         resulted_image.savefig(resulted_filepath)
+    elif type(resulted_image) == str:
+        return HTTPFound(location='/static/.compression/' + resulted_image)
     else:
         resulted_image.save(resulted_filepath)
 
