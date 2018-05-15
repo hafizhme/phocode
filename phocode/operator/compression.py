@@ -18,7 +18,7 @@ def rle_compress(img: Image):
 
     filename = str(uuid.uuid4())
     filepath = os.path.join(
-        os.getcwd(), 'phocode', 'static', '.compression',
+        '.', 'phocode', 'static', '.compression',
         filename
     )
     ofstream = open(filepath, 'wb+')

@@ -26,7 +26,7 @@ def decompress(request):
     resulted_image, error = compression.rle_decompress(request.POST['file'].file)
     filename = str(uuid.uuid4()) + '.png'
     filepath = os.path.join(
-        os.getcwd(), 'phocode', 'static', '.images',
+        '.', 'phocode', 'static', '.images',
         filename
     )
     resulted_image.save(filepath)
