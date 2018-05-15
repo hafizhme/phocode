@@ -21,11 +21,11 @@ def upload_image(request):
 @view_config(route_name='decompress', request_method='POST')
 def decompress(request):
     from phocode.operator import compression
+    from os import path
     import uuid
-    import os
     resulted_image, error = compression.rle_decompress(request.POST['file'].file)
     filename = str(uuid.uuid4()) + '.png'
-    filepath = os.path.join(
+    filepath = path.join(
         '.', 'phocode', 'static', '.images',
         filename
     )

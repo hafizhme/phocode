@@ -1,5 +1,5 @@
 from pyramid.config import Configurator
-
+from os import path
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
@@ -8,7 +8,7 @@ def main(global_config, **settings):
     config.include('pyramid_jinja2')
 
     pyramid_storage_settings = {
-        'storage.base_path': './phocode/static/.images',
+        'storage.base_path': path.join('.', 'phocode', 'static', '.images'),
         'storage.extension': 'images',
     }
     config.add_settings(pyramid_storage_settings)
